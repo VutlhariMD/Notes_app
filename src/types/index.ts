@@ -1,6 +1,6 @@
 export type Category ='work'| 'study' | 'personal'
 
-export type users={
+export type User={
     id:string,
     email:string,
     username: string,
