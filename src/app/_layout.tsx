@@ -4,7 +4,6 @@ import { AuthProvider, useAuth } from '../context/AuthContext';
 
 function RootNavigator() {
   const { user, loading } = useAuth();
-  console.log('loading:', loading, '| user:', user);
 
   if (loading) {
     return (
@@ -14,7 +13,17 @@ function RootNavigator() {
     );
   }
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Protected guard={!!user}>
+        <Stack.Screen name="(app)" />
+      </Stack.Protected>
+
+      <Stack.Protected guard={!user}>
+        <Stack.Screen name="(auth)" />
+      </Stack.Protected>
+    </Stack>
+  );
 }
 
 export default function RootLayout() {
