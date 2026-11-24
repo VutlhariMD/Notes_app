@@ -2,9 +2,9 @@ import { Stack } from 'expo-router';
 import { ActivityIndicator, View } from 'react-native';
 import { AuthProvider, useAuth } from '../context/AuthContext';
 
-//Root navigator 
 function RootNavigator() {
   const { user, loading } = useAuth();
+  console.log('loading:', loading, '| user:', user);
 
   if (loading) {
     return (
@@ -14,23 +14,12 @@ function RootNavigator() {
     );
   }
 
-  return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Protected guard={!!user}>
-        <Stack.Screen name="(app)" />
-      </Stack.Protected>
-
-      <Stack.Protected guard={!user}>
-        <Stack.Screen name="(auth)" />
-      </Stack.Protected>
-    </Stack>
-  );
+  return <Stack screenOptions={{ headerShown: false }} />;
 }
 
 export default function RootLayout() {
   return (
     <AuthProvider>
-
       <RootNavigator />
     </AuthProvider>
   );
