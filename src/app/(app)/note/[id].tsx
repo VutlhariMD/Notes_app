@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TextInput, Pressable, Alert, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, Alert, ScrollView, StyleSheet ,Platform} from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useNotes } from '../../../context/NotesContext';
 import { Category } from '../../../types';
@@ -44,19 +44,25 @@ export default function NoteScreen() {
     router.back();
   }
 
-  function handleDelete() {
-    Alert.alert('Delete note', 'This cannot be undone.', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Delete',
-        style: 'destructive',
-        onPress: async () => {
-          await deleteNote(id);
-          router.back();
-        },
-      },
-    ]);
+async function removeNote() {
+  await deleteNote(id);
+  router.back();
+}
+
+function handleDelete() {
+  if (Platform.OS === 'web') {
+    // Alert buttons don't work on web, so use the browser's confirm box
+    if (window.confirm('Delete this note? This cannot be undone.')) {
+      removeNote();
+    }
+    return;
   }
+
+  Alert.alert('Delete note', 'This cannot be undone.', [
+    { text: 'Cancel', style: 'cancel' },
+    { text: 'Delete', style: 'destructive', onPress: removeNote },
+  ]);
+}
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
