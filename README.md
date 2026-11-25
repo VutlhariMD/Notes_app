@@ -9,12 +9,12 @@ A secure note-taking mobile app built with **React Native**, **Expo Router** and
 
 
 ## Tech Stack
- React Native + Expo
- Expo Router
- TypeScript
- AsyncStorage
- expo-crypto
- React Context
+ * React Native + Expo
+ * Expo Router
+ * TypeScript
+ * AsyncStorage
+ * expo-crypto
+ * React Context
  
 
 
@@ -41,7 +41,7 @@ npx expo start
 
 Scan the QR code with Expo Go, or press `a` for Android emulator or `i` for iOS simulator.
 
-## Usage
+## User flow
 
 1. Open the app and tap **Register** to create an account.
 2. Add a note with the category, optional title and text.
