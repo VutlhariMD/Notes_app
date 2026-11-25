@@ -1,56 +1,50 @@
-# Welcome to your Expo app 👋
+# Notes Application
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A secure note-taking mobile app built with **React Native**, **Expo Router** and **TypeScript**. Users register and log in, then create, organise, search and sort their notes across Work, Study and Personal categories. All data is stored on the device using AsyncStorage.
 
-## Get started
 
-1. Install dependencies
 
-   ```bash
-   npm install
-   ```
 
-2. Start the app
 
-   ```bash
-   npx expo start
-   ```
 
-In the output, you'll find options to open the app in a
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Tech Stack
+ React Native + Expo
+ Expo Router
+ TypeScript
+ AsyncStorage
+ expo-crypto
+ React Context
+ 
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
 
-When you're ready, run:
+## Getting Started
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (LTS version)
+- The **Expo Go** app on your phone, or an Android/iOS emulator
+
+### Installation
 
 ```bash
-npm run reset-project
+# Clone the repository
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>
+
+# Install dependencies
+npm install
+
+# Start the app
+npx expo start
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Scan the QR code with Expo Go, or press `a` for Android emulator or `i` for iOS simulator.
 
-### Other setup steps
+## Usage
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1. Open the app and tap **Register** to create an account.
+2. Add a note with the category, optional title and text.
+3. Browse notes by category using the tabs.
+4. Use the search bar to find notes by word, and the sort option to order them by date.
+5. Open the **Profile** tab to update your credentials or log out.
