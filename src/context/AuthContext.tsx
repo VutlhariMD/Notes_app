@@ -18,6 +18,10 @@ interface AuthContextType {
   register: (email: string, username: string, password: string) => Promise<AuthResult>;
   login: (email: string, password: string) => Promise<AuthResult>;
   logout: () => Promise<void>;
+  updateProfile: (
+  currentPassword: string,
+  changes: { username?: string; email?: string; newPassword?: string }
+) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -98,10 +102,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await clearSession();
     setUser(null);
   }
+async function updateProfile(
+  currentPassword: string,
+  changes: { username?: string; email?: string; newPassword?: string }
+): Promise<void> {
+  if (!user) throw new Error('Not logged in');
 
+  const users = await getUsers();
+  const me = users.find((u) => u.id === user.id);
+  if (!me) throw new Error('User not found');
+
+  // Re-check the password before allowing any change
+  if (me.password !== currentPassword) {
+    throw new Error('Current password is incorrect');
+  }
+
+  const email = changes.email?.trim().toLowerCase() ?? me.email;
+  if (email !== me.email && users.some((u) => u.email === email)) {
+    throw new Error('That email is already in use');
+  }
+
+  const updated: User = {
+    ...me,
+    email,
+    username: changes.username?.trim() || me.username,
+    password: changes.newPassword || me.password,
+  };
+
+  await saveUsers(users.map((u) => (u.id === me.id ? updated : u)));
+  setUser(updated);
+}
   return (
     //AuthContext.Provider shares authentication information
-    <AuthContext.Provider value={{ user, loading, register, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, register, login, logout,updateProfile }}>
       {children}
     </AuthContext.Provider>
   );
